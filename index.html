@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Thermal Mesh Lab</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./src/heat.js"></script>
+  <script defer src="./src/lab.js"></script>
+</head>
+<body>
+  <main class="lab">
+    <header>
+      <h1>Thermal Mesh Lab</h1>
+      <p>Explore how heat spreads across a plate and measure what changes as the mesh gets finer.</p>
+    </header>
+
+    <div class="workspace">
+      <section class="panel controls" aria-labelledby="controls-heading">
+        <h2 id="controls-heading">Solve setup</h2>
+        <label for="scenario">Heat scenario</label>
+        <select id="scenario">
+          <option value="internal">Internal heat source</option>
+          <option value="gradient">Warm left edge</option>
+        </select>
+        <p id="scenario-detail"></p>
+        <label for="divisions">Cells per side</label>
+        <select id="divisions">
+          <option value="8">8 × 8</option>
+          <option value="16" selected>16 × 16</option>
+          <option value="32">32 × 32</option>
+          <option value="64">64 × 64</option>
+        </select>
+        <label for="show-mesh" class="checkbox">
+          <input type="checkbox" id="show-mesh" checked> Show triangle edges
+        </label>
+      </section>
+
+      <section class="panel field" aria-labelledby="field-heading">
+        <h2 id="field-heading">Temperature field</h2>
+        <figure>
+          <canvas id="field" width="560" height="560" role="img" aria-label="Heat distribution across the plate">
+            The numerical summary gives the center and peak temperatures.
+          </canvas>
+          <figcaption>
+            <span>0 · Cold</span>
+            <span class="legend" aria-hidden="true"></span>
+            <span>1 · Warm</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="panel readings" aria-labelledby="readings-heading" aria-live="polite">
+        <h2 id="readings-heading">Solution</h2>
+        <dl>
+          <div><dt>Mesh nodes</dt><dd id="nodes"></dd></div>
+          <div><dt>Triangles</dt><dd id="triangles"></dd></div>
+          <div><dt>Center temperature</dt><dd id="center"></dd></div>
+          <div><dt>Peak temperature</dt><dd id="peak"></dd></div>
+          <div class="error"><dt>Max. nodal error</dt><dd id="nodal-error"></dd></div>
+        </dl>
+        <p>Compared with the known solution at each mesh node. Temperatures are normalized.</p>
+      </section>
+    </div>
+    <p id="status" role="alert" hidden></p>
+  </main>
+</body>
+</html>
